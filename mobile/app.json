@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "PocketPilot",
+    "slug": "pocketpilot",
+    "scheme": "pocketpilot",
+    "version": "0.2.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.pocketpilot",
+      "entitlements": {
+        "com.apple.security.application-groups": [
+          "group.com.example.pocketpilot"
+        ]
+      },
+      "infoPlist": {
+        "PocketPilotAppGroup": "group.com.example.pocketpilot"
+      }
+    },
+    "android": {
+      "package": "com.example.pocketpilot"
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-notifications",
+      "./plugins/withBudgetWidget"
+    ]
+  }
+}

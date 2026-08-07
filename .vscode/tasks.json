@@ -1,0 +1,164 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Backend: Create virtual environment",
+      "type": "shell",
+      "command": "python3 -m venv .venv",
+      "windows": {
+        "command": "py -3 -m venv .venv"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Backend: Install dependencies",
+      "type": "shell",
+      "command": ".venv/bin/python -m pip install --upgrade pip && .venv/bin/python -m pip install -r requirements.txt",
+      "windows": {
+        "command": ".venv\\Scripts\\python.exe -m pip install --upgrade pip; .venv\\Scripts\\python.exe -m pip install -r requirements.txt"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Backend: Copy environment template",
+      "type": "shell",
+      "command": "test -f .env || cp .env.example .env",
+      "windows": {
+        "command": "if (!(Test-Path .env)) { Copy-Item .env.example .env }"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Backend: Run migrations",
+      "type": "shell",
+      "command": ".venv/bin/alembic upgrade head",
+      "windows": {
+        "command": ".venv\\Scripts\\alembic.exe upgrade head"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Backend: Seed demo data",
+      "type": "shell",
+      "command": ".venv/bin/python -m app.seed",
+      "windows": {
+        "command": ".venv\\Scripts\\python.exe -m app.seed"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Backend: Run server",
+      "type": "shell",
+      "command": ".venv/bin/uvicorn app.main:app --reload",
+      "windows": {
+        "command": ".venv\\Scripts\\uvicorn.exe app.main:app --reload"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": ".*"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*Uvicorn running.*|.*Started reloader process.*",
+          "endsPattern": ".*Application startup complete.*"
+        }
+      }
+    },
+    {
+      "label": "Backend: Run tests",
+      "type": "shell",
+      "command": ".venv/bin/python -m pytest",
+      "windows": {
+        "command": ".venv\\Scripts\\python.exe -m pytest"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Mobile: Copy environment template",
+      "type": "shell",
+      "command": "test -f .env || cp .env.example .env",
+      "windows": {
+        "command": "if (!(Test-Path .env)) { Copy-Item .env.example .env }"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/mobile"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Mobile: Install dependencies",
+      "type": "npm",
+      "script": "install",
+      "path": "mobile/",
+      "problemMatcher": []
+    },
+    {
+      "label": "Mobile: Start Expo",
+      "type": "npm",
+      "script": "start",
+      "path": "mobile/",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Mobile: Run iOS",
+      "type": "npm",
+      "script": "ios",
+      "path": "mobile/",
+      "problemMatcher": []
+    },
+    {
+      "label": "Database: Start PostgreSQL",
+      "type": "shell",
+      "command": "docker compose up -d db",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Setup: Backend",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Backend: Create virtual environment",
+        "Backend: Install dependencies",
+        "Backend: Copy environment template",
+        "Backend: Run migrations",
+        "Backend: Seed demo data"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Setup: Mobile",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Mobile: Copy environment template",
+        "Mobile: Install dependencies"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

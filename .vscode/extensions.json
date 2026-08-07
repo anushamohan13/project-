@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "charliermarsh.ruff",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker",
+    "expo.vscode-expo-tools"
+  ]
+}

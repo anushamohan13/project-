@@ -1,0 +1,10 @@
+{
+  "name": "budget-widget",
+  "version": "0.1.0",
+  "main": "index.js",
+  "private": true,
+  "peerDependencies": {
+    "expo": "*",
+    "expo-modules-core": "*"
+  }
+}

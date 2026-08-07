@@ -1,0 +1,10 @@
+{
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": [
+    "backend/tests"
+  ],
+  "files.associations": {
+    "*.jsx": "javascriptreact"
+  },
+  "editor.formatOnSave": true
+}
